@@ -6,7 +6,7 @@ This repository contains a LaTeX template for the report on **Quantum Computing 
 
 - `quantum_rtos_report.tex` - Main LaTeX template file
 - `figures/` - Directory for your figures
-- `comparison_table.xlsx` - Optional Excel file for detailed comparison table (if needed)
+- `comparison_table.csv` - Optional CSV file for detailed comparison table (can be opened in Excel)
 
 ## Usage Instructions
 
@@ -103,12 +103,12 @@ The template is designed to produce a 2-3 page report when filled with appropria
 4. Add citations to support your arguments
 5. Review and edit for clarity and coherence
 
-## Optional Comparison Table (Excel)
+## Optional Comparison Table (CSV/Excel)
 
 If you prefer to create a detailed comparison table in Excel:
-1. Use the provided `comparison_table.xlsx` template
-2. Fill in the comparison criteria for different scheduling approaches
-3. Submit it alongside the PDF report
+1. Use the provided `comparison_table.csv` template (can be opened in Excel)
+2. The template includes 7 pre-populated scheduling approaches with descriptions, advantages, disadvantages, and use cases
+3. Customize as needed and submit alongside the PDF report
 
 ## Support
 
