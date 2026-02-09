@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% Document Information
+\title{Quantum Computing and RTOS: \\ Exploring Real-Time Scheduling for Quantum Computing Systems}
+\author{Group: Motorcycle}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+% Fill in your abstract here (150-200 words)
+% Briefly introduce quantum computing and RTOS integration
+% Mention the main challenges and approaches discussed
+\end{abstract}
+
+\section{Introduction}
+% Fill in your introduction here
+% Introduce quantum computing
+% Introduce real-time operating systems (RTOS)
+% Explain why real-time scheduling is important for quantum computing systems
+% Provide overview of the report structure
+
+\section{Background}
+\subsection{Quantum Computing Fundamentals}
+% Provide brief background on quantum computing concepts
+% Qubits, superposition, entanglement
+% Quantum gates and circuits
+
+\subsection{Real-Time Operating Systems}
+% Brief introduction to RTOS concepts
+% Real-time scheduling requirements
+% Hard vs. soft real-time systems
+
+\section{Challenges in Real-Time Scheduling for Quantum Computing Systems}
+% Main section - discuss various challenges
+
+\subsection{Quantum Coherence Time Constraints}
+% Discuss the challenge of decoherence
+% Time-sensitive nature of quantum operations
+% Impact on scheduling decisions
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{figures/coherence_time.png}
+    \caption{Example: Quantum coherence time decay and its impact on scheduling windows}
+    \label{fig:coherence}
+\end{figure}
+
+\subsection{Quantum Error Correction Overhead}
+% Discuss error correction requirements
+% Trade-offs between error correction and execution time
+% Scheduling implications
+
+\subsection{Resource Allocation and Qubit Mapping}
+% Physical qubit limitations
+% Mapping logical to physical qubits
+% Scheduling constraints from hardware topology
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.7\textwidth]{figures/qubit_mapping.png}
+    \caption{Example: Qubit connectivity graph and mapping constraints}
+    \label{fig:qubit_mapping}
+\end{figure}
+
+\subsection{Classical-Quantum Interaction Delays}
+% Communication between classical and quantum processors
+% Latency considerations
+% Hybrid algorithm scheduling challenges
+
+\subsection{Non-Deterministic Execution Times}
+% Variability in quantum measurements
+% Probabilistic nature of quantum algorithms
+% Challenges for traditional RTOS schedulers
+
+\section{Approaches to Real-Time Scheduling}
+% Main section - discuss various approaches and solutions
+
+\subsection{Priority-Based Scheduling}
+% Adapt traditional priority scheduling for quantum tasks
+% Assigning priorities based on coherence time requirements
+% Preemption challenges in quantum context
+
+\subsection{Deadline-Driven Scheduling}
+% EDF (Earliest Deadline First) adaptations
+% Setting deadlines based on decoherence limits
+% Feasibility analysis for quantum workloads
+
+\begin{figure}[H]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{figures/scheduling_approach.png}
+    \caption{Example: Comparison of different scheduling approaches for quantum tasks}
+    \label{fig:scheduling}
+\end{figure}
+
+\subsection{Time-Slicing and Quantum Circuit Partitioning}
+% Breaking quantum circuits into schedulable units
+% Intermediate measurements and state preservation
+% Trade-offs between partitioning and overhead
+
+\subsection{Hybrid Classical-Quantum Scheduling}
+% Co-scheduling classical and quantum resources
+% Communication-aware scheduling
+% Optimization algorithms for hybrid systems
+
+\subsection{Predictive and Adaptive Scheduling}
+% Learning-based approaches
+% Adapting to hardware characteristics
+% Online vs. offline scheduling strategies
+
+\section{Comparison and Analysis}
+% Optional: Compare different approaches
+% Discuss advantages and disadvantages
+% Performance metrics and trade-offs
+
+% Optional: Include a table comparing approaches
+\begin{table}[H]
+    \centering
+    \caption{Comparison of Real-Time Scheduling Approaches for Quantum Systems}
+    \label{tab:comparison}
+    \begin{tabular}{@{}llll@{}}
+        \toprule
+        \textbf{Approach} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Use Case} \\ 
+        \midrule
+        Priority-Based & & & \\
+        \midrule
+        Deadline-Driven & & & \\
+        \midrule
+        Time-Slicing & & & \\
+        \midrule
+        Hybrid & & & \\
+        \midrule
+        Adaptive & & & \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Conclusion}
+% Summarize key challenges identified
+% Recap main scheduling approaches
+% Future directions and open problems
+% Final thoughts on the integration of RTOS and quantum computing
+
+\section{Future Work}
+% Optional: Discuss future research directions
+% Emerging technologies and approaches
+% Open challenges
+
+% Bibliography
+\begin{thebibliography}{99}
+
+\bibitem{ref1}
+% Add your references here
+% Example: Author Name, "Title of Paper", Journal/Conference, Year.
+
+\bibitem{ref2}
+% Reference 2
+
+\bibitem{ref3}
+% Reference 3
+
+\bibitem{ref4}
+% Reference 4
+
+\bibitem{ref5}
+% Reference 5
+
+\end{thebibliography}
+
+\end{document}
