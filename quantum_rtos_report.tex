@@ -16,7 +16,7 @@
 \usepackage{enumitem}
 
 % Document Information
-\title{Quantum Computing and RTOS: \\ Exploring Real-Time Scheduling for Quantum Computing Systems}
+\title{Quantum Computing and RTOS}
 \author{Group: Motorcycle}
 \date{\today}
 
@@ -24,144 +24,21 @@
 
 \maketitle
 
-\begin{abstract}
-% Fill in your abstract here (150-200 words)
-% Briefly introduce quantum computing and RTOS integration
-% Mention the main challenges and approaches discussed
-\end{abstract}
+\section{Introduction to Schedulers in RTOS}
+The most important part of a real-time operating system is its scheduler. The purpose of a scheduler is to distribute the resources of the processor among multiple tasks in regard to efficiency and optimum utilization but a scheduler for a real-time system shall also guarantee to meet a specific deadline for each task. To accomplish those requirements several scheduling strategies have been developed.
 
-\section{Introduction}
-% Fill in your introduction here
-% Introduce quantum computing
-% Introduce real-time operating systems (RTOS)
-% Explain why real-time scheduling is important for quantum computing systems
-% Provide overview of the report structure
+\section{Introduction to Quantum Computing}
+A classic computer calculates with two states known as 0 and 1 and are physically represented by a voltage level. But on a quantum computer the information is represented by qubits which can be created by spinning electrons or atoms. Each qubit has basis states that are distinct or also called orthogonal. That means that if the qubit is in one of the basis states it cannot be in the other basis state. Besides that, qubits can be in superposition. Those superpositions can be illustrated by a spinning coin. When a spinning coin is collapses it will be in a basis state, head or tail, but while spinning the coin is in both of those states simultaneously. This principle practically allows to do calculations with a 0 and 1 at the same time. In order to control the signals, like in a classic computer by NAND or XOR gates, the gates on a quantum computer are implemented by lasers which affect the qubits.
 
-\section{Background}
-\subsection{Quantum Computing Fundamentals}
-% Provide brief background on quantum computing concepts
-% Qubits, superposition, entanglement
-% Quantum gates and circuits
+\section{Architecture of quantum computing system}
+The essential part of a quantum computer is the QPU (Quantum Processing Unit). However, the classical computing parts such as CPU are used to validate the results of quantum calculations and control the qubits. Therefore, synchronization and coordination of both parts is essential.
 
-\subsection{Real-Time Operating Systems}
-% Brief introduction to RTOS concepts
-% Real-time scheduling requirements
-% Hard vs. soft real-time systems
+\section{Relevance of real-time scheduling in quantum computing}
+The state of the physical qubit is unstable and can be easily corrupted by extern factors as thermal noise energy, vibrations and etc. Therefore, the control system that relies on classic computing and enables the reading of the qubit state, error correction and the regulation of the laser at quantum gates must operate in real-time.
 
-\section{Challenges in Real-Time Scheduling for Quantum Computing Systems}
-% Main section - discuss various challenges
+\section{Challenges in real-time scheduling for quantum computing systems}
 
-\subsection{Quantum Coherence Time Constraints}
-% Discuss the challenge of decoherence
-% Time-sensitive nature of quantum operations
-% Impact on scheduling decisions
-
-\begin{figure}[H]
-    \centering
-    % \includegraphics[width=0.8\textwidth]{figures/coherence_time.png}
-    \caption{Example: Quantum coherence time decay and its impact on scheduling windows}
-    \label{fig:coherence}
-\end{figure}
-
-\subsection{Quantum Error Correction Overhead}
-% Discuss error correction requirements
-% Trade-offs between error correction and execution time
-% Scheduling implications
-
-\subsection{Resource Allocation and Qubit Mapping}
-% Physical qubit limitations
-% Mapping logical to physical qubits
-% Scheduling constraints from hardware topology
-
-\begin{figure}[H]
-    \centering
-    % \includegraphics[width=0.7\textwidth]{figures/qubit_mapping.png}
-    \caption{Example: Qubit connectivity graph and mapping constraints}
-    \label{fig:qubit_mapping}
-\end{figure}
-
-\subsection{Classical-Quantum Interaction Delays}
-% Communication between classical and quantum processors
-% Latency considerations
-% Hybrid algorithm scheduling challenges
-
-\subsection{Non-Deterministic Execution Times}
-% Variability in quantum measurements
-% Probabilistic nature of quantum algorithms
-% Challenges for traditional RTOS schedulers
-
-\section{Approaches to Real-Time Scheduling}
-% Main section - discuss various approaches and solutions
-
-\subsection{Priority-Based Scheduling}
-% Adapt traditional priority scheduling for quantum tasks
-% Assigning priorities based on coherence time requirements
-% Preemption challenges in quantum context
-
-\subsection{Deadline-Driven Scheduling}
-% EDF (Earliest Deadline First) adaptations
-% Setting deadlines based on decoherence limits
-% Feasibility analysis for quantum workloads
-
-\begin{figure}[H]
-    \centering
-    % \includegraphics[width=0.8\textwidth]{figures/scheduling_approach.png}
-    \caption{Example: Comparison of different scheduling approaches for quantum tasks}
-    \label{fig:scheduling}
-\end{figure}
-
-\subsection{Time-Slicing and Quantum Circuit Partitioning}
-% Breaking quantum circuits into schedulable units
-% Intermediate measurements and state preservation
-% Trade-offs between partitioning and overhead
-
-\subsection{Hybrid Classical-Quantum Scheduling}
-% Co-scheduling classical and quantum resources
-% Communication-aware scheduling
-% Optimization algorithms for hybrid systems
-
-\subsection{Predictive and Adaptive Scheduling}
-% Learning-based approaches
-% Adapting to hardware characteristics
-% Online vs. offline scheduling strategies
-
-\section{Comparison and Analysis}
-% Optional: Compare different approaches
-% Discuss advantages and disadvantages
-% Performance metrics and trade-offs
-
-% Optional: Include a table comparing approaches
-\begin{table}[H]
-    \centering
-    \caption{Comparison of Real-Time Scheduling Approaches for Quantum Systems}
-    \label{tab:comparison}
-    \begin{tabular}{@{}llll@{}}
-        \toprule
-        \textbf{Approach} & \textbf{Advantages} & \textbf{Disadvantages} & \textbf{Use Case} \\ 
-        \midrule
-        Priority-Based & & & \\
-        \midrule
-        Deadline-Driven & & & \\
-        \midrule
-        Time-Slicing & & & \\
-        \midrule
-        Hybrid & & & \\
-        \midrule
-        Adaptive & & & \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\section{Conclusion}
-% Summarize key challenges identified
-% Recap main scheduling approaches
-% Future directions and open problems
-% Final thoughts on the integration of RTOS and quantum computing
-
-\section{Future Work}
-% Optional: Discuss future research directions
-% Emerging technologies and approaches
-% Open challenges
+\section{Approaches to real-time scheduling}
 
 % Bibliography
 \begin{thebibliography}{99}
