@@ -9,11 +9,12 @@
 \usepackage{float}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{hyperref}
-\usepackage{cite}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage[backend=biber, style=ieee, sorting=nyt, sortlocale=en_US]{biblatex}
+\addbibresource{references.bib}
 
 % Document Information
 \title{Quantum Computing and RTOS}
@@ -24,41 +25,115 @@
 
 \maketitle
 
-\section{Introduction to Schedulers in RTOS}
+\section{Introduction}
+Quantum computing represents a fundamentally new paradigm of computation 
+that leverages quantum mechanical phenomena such as superposition and entanglement 
+to solve certain classes of problems more efficiently than classical computers. 
+In recent years, significant advances in hardware development have enabled 
+the construction of increasingly complex quantum processing units (QPUs). 
+However, quantum computers do not operate in isolation. 
+They rely heavily on classical control systems responsible 
+for pulse generation, measurement processing, and error correction.
+
+At the same time, real-time operating systems (RTOS) play a crucial role in classical computing environments
+where deterministic timing behavior and strict deadline guarantees are required. 
+In embedded and safety-critical systems, real-time scheduling ensures that computational tasks 
+are executed within well-defined temporal constraints. 
+The concept of predictable and low-latency task execution is central to many modern control systems.
+
+As quantum computing systems evolve, strict timing requirements emerge within the classical control layer. 
+Qubits exhibit limited coherence times, and quantum gate operations must be executed with nanosecond precision. 
+Furthermore, measurement results often need to be processed with minimal latency 
+in order to enable feedback mechanisms and quantum error correction. 
+These characteristics introduce real-time properties into quantum computing architectures 
+and raise the question of how classical real-time scheduling principles can be applied or adapted in this context.
+
+This report explores the relationship between quantum computing systems and real-time operating systems. 
+It analyzes the real-time requirements that arise in quantum computing architectures, 
+discusses the challenges of applying traditional scheduling approaches to quantum systems, 
+and examines current and potential strategies for implementing real-time scheduling 
+in the classical control infrastructure surrounding quantum processors.
+
+\section{Basics of Real-Time Operating Systems}
 The most important part of a real-time operating system is its scheduler. The purpose of a scheduler is to distribute the resources of the processor among multiple tasks in regard to efficiency and optimum utilization but a scheduler for a real-time system shall also guarantee to meet a specific deadline for each task. To accomplish those requirements several scheduling strategies have been developed.
 
-\section{Introduction to Quantum Computing}
-A classic computer calculates with two states known as 0 and 1 and are physically represented by a voltage level. But on a quantum computer the information is represented by qubits which can be created by spinning electrons or atoms. Each qubit has basis states that are distinct or also called orthogonal. That means that if the qubit is in one of the basis states it cannot be in the other basis state. Besides that, qubits can be in superposition. Those superpositions can be illustrated by a spinning coin. When a spinning coin is collapses it will be in a basis state, head or tail, but while spinning the coin is in both of those states simultaneously. This principle practically allows to do calculations with a 0 and 1 at the same time. In order to control the signals, like in a classic computer by NAND or XOR gates, the gates on a quantum computer are implemented by lasers which affect the qubits.
+\section{Fundamentals of Quantum Computing}
 
-\section{Architecture of quantum computing system}
-The essential part of a quantum computer is the QPU (Quantum Processing Unit). However, the classical computing parts such as CPU are used to validate the results of quantum calculations and control the qubits. Therefore, synchronization and coordination of both parts is essential.
+A classical computer processes information using bits that take on one of two distinct states, 
+typically represented physically by voltage levels corresponding to 0 and 1. 
+In contrast, a quantum computer operates using quantum bits, or qubits.
+A qubit can be physically realized in various systems, such as electron spin, trapped ions, photon polarization, or superconducting circuits.
 
-\section{Relevance of real-time scheduling in quantum computing}
+Each qubit is described by two orthogonal basis states, commonly denoted as $\lvert 0 \rangle$ and $\lvert 1 \rangle$, 
+which are comparable to the classical binary states. 
+If a qubit is measured in one of these basis states, it cannot simultaneously be found in the other. 
+However, unlike classical bits, qubits can exist in a superposition of both basis states.
+
+Superposition can be illustrated by the analogy of a spinning coin. 
+While a classical coin is either heads or tails when observed, a spinning coin appears to represent both states until it is observed. 
+However, unlike a classical probabilistic mixture, quantum superposition represents a coherent linear combination of basis states that allows for interference effects.
+
+Mathematically, the state of a single qubit is described as a vector in a two-dimensional Hilbert space:
+
+\begin{equation}
+    \lvert \psi \rangle = \alpha \lvert 0 \rangle + \beta \lvert 1 \rangle,
+\end{equation}
+
+where $\alpha$ and $\beta$ are complex probability amplitudes satisfying the normalization condition $|\alpha|^2 + |\beta|^2 = 1$.
+
+By applying quantum gates, which are unitary operations on the state vector, 
+it is possible to manipulate these superposition states. 
+Computation in quantum systems therefore takes place through operations in vector space, 
+enabling interference and entanglement. 
+These properties form the fundamental basis of quantum computing 
+and distinguish it from classical computation. \cite{IntroQuantumComputing}
+
+
+\section{Architecture of Quantum Computing System}
+The central component of a quantum computer is the Quantum Processing Unit (QPU). 
+Qubits are physically realized and maintained within the QPU 
+and are highly sensitive to environmental disturbances. 
+To minimize thermal noise and suppress decoherence effects, 
+QPUs are typically operated at cryogenic temperatures close to absolute zero.
+
+In order to control the qubits, quantum gates are implemented 
+using precisely shaped laser or microwave pulses, 
+depending on the physical realization of the system. 
+These pulses influence properties such as the spin, polarization, or energy levels of the qubits. 
+To generate pulses with specific frequency, amplitude, and phase characteristics, 
+a sophisticated classical control system is required.
+
+This control infrastructure consists of high-performance electronic components, 
+including application-specific integrated circuits (ASICs) and field-programmable gate arrays (FPGAs), 
+which are widely used for fast and deterministic signal processing. 
+The generated control pulses enable the initialization, manipulation, and readout of qubits.
+
+Typically, a qubit is initialized in its ground state \lvert 0 \rangle, 
+which is achieved by cooling the system to reduce thermal excitations. 
+After initialization, quantum gates are applied via precisely timed control pulses to manipulate the quantum state. 
+The state of a qubit is read out by measuring changes in the reflected 
+or transmitted microwave signals, depending on the hardware architecture.
+
+Due to the inherent instability of quantum states and the limited coherence time of qubits, 
+the classical control system must process measurement results with minimal latency. 
+In particular, quantum error correction 
+and feedback operations require real-time signal processing to maintain computational accuracy. 
+Therefore, deterministic timing and low-latency control 
+are essential components of modern quantum computing architectures.\cite{QPArch}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/QCOp.png}
+    \caption{Operations on the Quantum Computing Architecture \cite{QPArch}}
+\end{figure}
+
+\section{Real-Time Characteristics in Quantum Computing Systems}
 The state of the physical qubit is unstable and can be easily corrupted by extern factors as thermal noise energy, vibrations and etc. Therefore, the control system that relies on classic computing and enables the reading of the qubit state, error correction and the regulation of the laser at quantum gates must operate in real-time.
 
 \section{Challenges in real-time scheduling for quantum computing systems}
 
 \section{Approaches to real-time scheduling}
 
-% Bibliography
-\begin{thebibliography}{99}
-
-\bibitem{ref1}
-% Add your references here
-% Example: Author Name, "Title of Paper", Journal/Conference, Year.
-
-\bibitem{ref2}
-% Reference 2
-
-\bibitem{ref3}
-% Reference 3
-
-\bibitem{ref4}
-% Reference 4
-
-\bibitem{ref5}
-% Reference 5
-
-\end{thebibliography}
+\printbibliography[title={References}]
 
 \end{document}
