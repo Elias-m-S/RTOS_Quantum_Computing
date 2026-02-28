@@ -1,9 +1,11 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 
 % Packages
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
+\usepackage{times} % Use Times font
+\usepackage{parskip} % Add space between paragraphs
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
@@ -12,12 +14,12 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{booktabs}
-\usepackage{enumitem}
-\usepackage[backend=biber, style=ieee, sorting=nyt, sortlocale=en_US]{biblatex}
-\addbibresource{references.bib}
+% \usepackage{enumitem} % Removed because the package is missing. Uncomment if installed and needed.
+% \usepackage[backend=biber, style=ieee, sorting=nyt, sortlocale=en_US]{biblatex}
+% \addbibresource{references.bib}
 
 % Document Information
-\title{Quantum Computing and RTOS}
+\title{\textbf{Quantum Computing and Real-Time Operating Systems: An Analysis of Architectures and Scheduling}}
 \author{Group: Motorcycle}
 \date{\today}
 
@@ -55,8 +57,18 @@ and examines current and potential strategies for implementing real-time schedul
 in the classical control infrastructure surrounding quantum processors.
 
 \section{Basics of Real-Time Operating Systems}
-The most important part of a real-time operating system is its scheduler. The purpose of a scheduler is to distribute the resources of the processor among multiple tasks in regard to efficiency and optimum utilization but a scheduler for a real-time system shall also guarantee to meet a specific deadline for each task. To accomplish those requirements several scheduling strategies have been developed.
 
+The fundamental objective of a Real-Time Operating System (RTOS) is to execute computational tasks within strict temporal constraints. Unlike general-purpose operating systems, where the primary goals are to maximize throughput and ensure fairness among users, an RTOS prioritizes predictability, determinism, and bounded latency \cite{Kopetz2011}. In real-time environments, the logical correctness of a computation is insufficient if the result is not delivered within a predefined time window, known as a deadline. 
+
+At the core of an RTOS lies its task scheduler, which allocates central processing unit (CPU) time according to specific scheduling algorithms, such as Rate Monotonic (RM) or Earliest Deadline First (EDF). The scheduler must ensure that critical tasks preempt lower-priority operations, strictly guaranteeing timely execution \cite{Liu2000}. Real-time systems are traditionally classified into three categories based on the severity of the consequences when a deadline is missed:
+
+\begin{itemize}
+    \item \textbf{Hard Real-Time:} Missing a deadline constitutes a total system failure and may lead to catastrophic consequences. Traditional examples include avionics flight control and automotive anti-lock braking systems.
+    \item \textbf{Firm Real-Time:} A late result holds zero utility and is immediately discarded, leading to degraded system performance but not outright failure (e.g., dropping frames in a multimedia stream).
+    \item \textbf{Soft Real-Time:} The value of a computation decreases after the deadline has passed, but the result remains somewhat useful, typical in graphical user interfaces.
+\end{itemize}
+
+In the context of the highly sensitive control architectures required for modern quantum processors, strict hard real-time guarantees are absolutely essential to maintain system integrity and computational coherence.
 \section{Fundamentals of Quantum Computing}
 
 A classical computer processes information using bits that take on one of two distinct states, 
@@ -108,7 +120,7 @@ including application-specific integrated circuits (ASICs) and field-programmabl
 which are widely used for fast and deterministic signal processing. 
 The generated control pulses enable the initialization, manipulation, and readout of qubits.
 
-Typically, a qubit is initialized in its ground state \lvert 0 \rangle, 
+Typically, a qubit is initialized in its ground state $\lvert 0 \rangle$, 
 which is achieved by cooling the system to reduce thermal excitations. 
 After initialization, quantum gates are applied via precisely timed control pulses to manipulate the quantum state. 
 The state of a qubit is read out by measuring changes in the reflected 
@@ -121,19 +133,46 @@ and feedback operations require real-time signal processing to maintain computat
 Therefore, deterministic timing and low-latency control 
 are essential components of modern quantum computing architectures.\cite{QPArch}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{imgs/QCOp.png}
     \caption{Operations on the Quantum Computing Architecture \cite{QPArch}}
 \end{figure}
 
 \section{Real-Time Characteristics in Quantum Computing Systems}
-The state of the physical qubit is unstable and can be easily corrupted by extern factors as thermal noise energy, vibrations and etc. Therefore, the control system that relies on classic computing and enables the reading of the qubit state, error correction and the regulation of the laser at quantum gates must operate in real-time.
-
+The operation of a quantum computer introduces unprecedented real-time constraints on its classical control infrastructure.
+Quantum bits (qubits), unlike classical transistors, are inherently fragile and extremely sensitive to environmental disturbances 
+such as thermal noise, electromagnetic interference, and material defects. 
+Interaction with the environment inevitably leads to decoherence, which corrupts the quantum superposition and entanglement. 
+Depending on the physical implementation—such as superconducting circuits or trapped ions—the coherence time ($T_1$ relaxation and $T_2$ dephasing times) 
+of a qubit frequently operates on the scale of microseconds to milliseconds. Consequently, 
+all state preparation, logic gate execution, 
+and measurement operations must be completed well within this narrow coherence window to avoid catastrophic data loss.
+To execute quantum algorithms, the classical control system must apply precisely scheduled and shaped analog signals, 
+typically in the form of microwave or laser pulses. 
+These pulses induce the physical interactions required to perform single- and two-qubit gates. 
+The timing of these pulses must be deterministic at the nanosecond scale; any timing jitter, 
+clock skew, or latency in pulse generation introduces phase errors, 
+diminishing gate fidelity and ultimately invalidating the computational accuracy.
+Furthermore, fault-tolerant quantum computing relies heavily on Quantum Error Correction (QEC) protocols, 
+such as surface codes, which are vital for scaling quantum systems. 
+QEC requires a continuous cycle of indirect syndrome measurements, rapid classical processing of the measurement outcomes, 
+and the timely application of corrective feedback pulses. 
+Because the physical qubits continue to undergo rapid decoherence while the error syndrome is being measured and processed, 
+the classical control system must decode the error and trigger the appropriate feedback loop in strict hard real-time. 
+This dynamic feedback loop commonly imposes extreme latency bounds in the range of hundreds of nanoseconds to a few microseconds.
+Failure to meet these stringent temporal deadlines renders the error correction entirely ineffective, 
+leading to irrecoverable logical errors that propagate through the system. 
+Thus, the classical infrastructure managing a Quantum Processing Unit (QPU) demands an execution environment where tasks, 
+such as pulse scheduling and syndrome decoding, are guaranteed to complete within highly deterministic and exceptionally short timing windows. 
+Conventional real-time operating systems must either be significantly adapted or tightly integrated with specialized hardware architectures, 
+such as Field-Programmable Gate Arrays (FPGAs), to fulfill these rigorous real-time demands.
 \section{Challenges in real-time scheduling for quantum computing systems}
 
 \section{Approaches to real-time scheduling}
 
-\printbibliography[title={References}]
+\bibliographystyle{ieeetr}
+\bibliography{references}
+% \printbibliography[title={References}]
 
 \end{document}
