@@ -158,6 +158,15 @@ Furthermore, fault-tolerant quantum computing relies heavily on Quantum Error Co
 such as surface codes, which are vital for scaling quantum systems. 
 QEC requires a continuous cycle of indirect syndrome measurements, rapid classical processing of the measurement outcomes, 
 and the timely application of corrective feedback pulses. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imgs/The-quantum-error-correction-QEC-model.png}
+    \caption{Digital System Design for Quantum Error Correction Codes \cite{article}}
+\end{figure}
+
+
+\section{Challenges in real-time scheduling for quantum computing systems}
 Because the physical qubits continue to undergo rapid decoherence while the error syndrome is being measured and processed, 
 the classical control system must decode the error and trigger the appropriate feedback loop in strict hard real-time. 
 This dynamic feedback loop commonly imposes extreme latency bounds in the range of hundreds of nanoseconds to a few microseconds.
@@ -167,7 +176,7 @@ Thus, the classical infrastructure managing a Quantum Processing Unit (QPU) dema
 such as pulse scheduling and syndrome decoding, are guaranteed to complete within highly deterministic and exceptionally short timing windows. 
 Conventional real-time operating systems must either be significantly adapted or tightly integrated with specialized hardware architectures, 
 such as Field-Programmable Gate Arrays (FPGAs), to fulfill these rigorous real-time demands.
-\section{Challenges in real-time scheduling for quantum computing systems}
+
 
 \section{Approaches to real-time scheduling}
 
