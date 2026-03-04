@@ -177,8 +177,35 @@ such as pulse scheduling and syndrome decoding, are guaranteed to complete withi
 Conventional real-time operating systems must either be significantly adapted or tightly integrated with specialized hardware architectures, 
 such as Field-Programmable Gate Arrays (FPGAs), to fulfill these rigorous real-time demands.
 
+\section{Challenges in real-time scheduling for quantum computing systems}
+Real-time scheduling plays a crucial role in the classical control systems that operate quantum computers. Unlike conventional computing systems, quantum processors require extremely precise timing and coordination between hardware components, measurement systems, and classical control software. These strict requirements introduce several challenges for the design and implementation of real-time scheduling mechanisms.
+
+One of the most fundamental challenges arises from qubit decoherence. Qubits are highly sensitive to environmental disturbances and tend to lose their quantum state over time due to interactions with the surrounding environment. This process, known as decoherence, limits the time window in which quantum operations can be performed reliably. As a result, control operations, measurements, and feedback mechanisms must be executed within strict timing constraints to ensure that quantum information is not lost before the computation is completed (Wong, 2024).
+
+Another challenge is the high sensitivity of quantum systems to noise and timing inaccuracies. Even small deviations in control signals or timing jitter can significantly affect the fidelity of quantum gates. Since quantum algorithms rely on precise manipulation of qubit states, any timing variability in the classical control system may introduce errors in the computation. Consequently, scheduling mechanisms must ensure highly deterministic execution and minimal latency in the control pipeline.
+
+A further complication arises from the need for real-time feedback and adaptive control. Many quantum computing architectures rely on measurement outcomes that must immediately influence subsequent operations. This is particularly important in quantum error correction, where measurement results are used to detect and correct errors in qubit states. The classical controller must therefore process measurement data and trigger corrective actions within extremely short time intervals, often in the range of microseconds or less.
+
+The increasing system complexity and scalability requirements also present major challenges. As quantum processors scale to larger numbers of qubits, the classical control infrastructure must coordinate an increasing number of parallel operations. These include pulse generation, qubit measurement, signal processing, and feedback control. Scheduling these tasks while maintaining strict timing guarantees becomes significantly more difficult as system size grows.
+
+In addition, the classical control systems of quantum computers typically consist of multiple hardware layers, including digital controllers, signal generators, measurement electronics, and cryogenic interfaces. The interaction between these layers introduces additional latency and synchronization challenges that must be considered when designing real-time scheduling mechanisms.
+
+Overall, these challenges demonstrate that the classical control layer of a quantum computer must operate under strict real-time constraints. Ensuring deterministic task execution, minimizing latency, and maintaining precise synchronization between hardware components are essential requirements for reliable quantum computation.
 
 \section{Approaches to real-time scheduling}
+To address the challenges described above, modern quantum computing platforms employ several approaches to achieve reliable real-time scheduling and control. These approaches combine specialized hardware, deterministic scheduling techniques, and tightly integrated control architectures.
+
+One widely used approach is the use of low-latency control hardware, often implemented using Field Programmable Gate Arrays (FPGAs). FPGA-based controllers allow measurement signals to be processed and control pulses to be generated with extremely low latency. Because these devices operate at the hardware level, they can perform signal processing and feedback operations much faster than traditional software-based control systems. This capability is essential for implementing real-time feedback loops required for quantum error correction and adaptive quantum experiments.
+
+Another important approach is the implementation of deterministic real-time scheduling algorithms. In real-time systems, tasks must meet strict deadlines to ensure correct system behavior. Scheduling strategies such as fixed-priority scheduling, deadline-based scheduling, or time-triggered scheduling can be used to guarantee predictable execution times. These methods ensure that critical control tasks are executed within their required time constraints (Buttazzo, 2011).
+
+In addition to deterministic scheduling, closed-loop feedback control plays a key role in many quantum computing systems. In such systems, measurement results are continuously monitored and used to adjust subsequent operations. For example, when an error syndrome is detected in a quantum error correction scheme, corrective operations must be applied immediately to maintain the integrity of the quantum state. This requires fast processing of measurement data and immediate scheduling of corrective tasks.
+
+Another promising approach is hardware–software co-design. Instead of treating the classical control system and the quantum processor as separate components, modern architectures increasingly integrate them into a unified control stack. In this approach, scheduling strategies, signal processing pipelines, and hardware interfaces are designed together to optimize system performance and minimize latency.
+
+Finally, scalable quantum control architectures often incorporate hierarchical scheduling structures. High-level software layers manage experiment configuration and algorithm execution, while lower-level real-time controllers handle time-critical tasks such as pulse generation and measurement processing. This hierarchical design allows complex quantum programs to be executed while maintaining strict timing guarantees at the hardware level.
+
+By combining deterministic scheduling algorithms, specialized hardware controllers, and integrated system architectures, modern quantum computing platforms are able to meet the demanding real-time requirements of quantum control systems. As quantum processors continue to scale, further research into efficient real-time scheduling and control strategies will remain essential for the development of large-scale quantum computing systems.
 
 \bibliographystyle{ieeetr}
 \bibliography{references}
