@@ -25,7 +25,49 @@
 
 \begin{document}
 
-\maketitle
+
+% --- Seitennummerierung: Römisch für Titelseite / Verzeichnisse ---
+\pagenumbering{Roman}
+
+% --- Titelseite ---
+\begin{titlepage}
+  \centering
+
+  % DHBW-Logo
+  \includegraphics[width=4cm]{imgs/logo_dhbw.png}\\[1.5cm]
+
+  % Titel
+  {\LARGE\bfseries Quantum Computing and RTOS}\\[0.5cm]
+  {\Large Exploring real-time scheduling for quantum computing systems}\\[2cm]
+
+  % Projektinformationen
+  {\large\bfseries Projektinformationen}\\[0.4cm]
+  \begin{tabular}{p{4cm}l}
+    Modul:       & Echtzeitbetriebsysteme \\
+    Hochschule:  & DHBW Ravensburg, Campus Friedrichshafen \\
+    Studiengang: & Embedded Systems \\
+    Dozent:    & Dr. -Ing. Omar Alnaseri \\
+  \end{tabular}
+
+  \vfill
+
+  % Autoren
+  {\large\bfseries Motorcycle}\\[0.6cm]
+  \begin{tabular}{ll}
+    {Dominik Borowski} & {7373896} \\
+    {Georg Martazov} & {7590033} \\
+    {Elias Sehmsdorf} & {2369656} \\
+  \end{tabular}
+
+  \vfill
+
+  % Datum
+  {\large Friedrichshafen, März~2026}
+\end{titlepage}
+
+% --- Arabische Seitennummerierung ab dem Inhalt ---
+\newpage
+\pagenumbering{arabic}
 
 \section{Introduction}
 Quantum computing represents a fundamentally new paradigm of computation 

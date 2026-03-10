@@ -1,8 +1,7 @@
 \begin{thebibliography}{1}
 
 \bibitem{Kopetz2011}
-H.~Kopetz, {\em Real-Time Systems: Design Principles for Distributed Embedded
-  Applications}.
+H.~Kopetz, {\em Real-Time Systems: Design Principles for Distributed Embedded Applications}.
 \newblock Springer Science \& Business Media, 2nd~ed., 2011.
 
 \bibitem{Liu2000}
@@ -18,23 +17,16 @@ H.~Y. Wong, {\em Quantum Computing Architecture and Hardware for Engineers}.
 \newblock Springer Nature, 2025.
 
 \bibitem{article}
-O.~Khalifa, N.~Sharif, R.~Saeed, S.~Abdel-Khalek, A.~Alharbi, and A.~Alkathiri,
-  ``Digital system design for quantum error correction codes,'' {\em Contrast
-  Media \& Molecular Imaging}, 12 2021.
+O.~Khalifa, N.~Sharif, R.~Saeed, S.~Abdel-Khalek, A.~Alharbi, and A.~Alkathiri, ``Digital system design for quantum error correction codes,'' {\em Contrast Media \& Molecular Imaging}, 12 2021.
 
 \bibitem{Salathé2018}
-Y.~Salathé {\em et~al.}, ``Low-latency digital signal processing for feedback
-  in quantum computing and control,'' {\em Physical Review Applied}, vol.~9,
-  no.~3, p.~034011, 2018.
+Y.~Salathé {\em et~al.}, ``Low-latency digital signal processing for feedback in quantum computing and control,'' {\em Physical Review Applied}, vol.~9, no.~3, p.~034011, 2018.
 
 \bibitem{Reuer2023}
-K.~Reuer {\em et~al.}, ``Realizing repeated quantum error correction in a
-  distance-three surface code,'' {\em Nature Communications}, vol.~14, p.~3148,
-  2023.
+K.~Reuer {\em et~al.}, ``Realizing repeated quantum error correction in a distance-three surface code,'' {\em Nature Communications}, vol.~14, p.~3148, 2023.
 
 \bibitem{IBMQuantum}
-{IBM Quantum}, ``{IBM Quantum Computing Platform}.''
-  \url{https://quantum.cloud.ibm.com/}, 2026.
+{IBM Quantum}, ``{IBM Quantum Computing Platform}.'' \url{https://quantum.cloud.ibm.com/}, 2026.
 \newblock Accessed: March 2026.
 
 \end{thebibliography}
